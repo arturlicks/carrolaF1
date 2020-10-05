@@ -1,7 +1,17 @@
 <% include header.ejs %>
 
 <br>
-<div class="card-deck">
+
+<!-- <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary">Round 1 <img class="card-img-bottom" src="/images/noun_Australian Grand Prix_189890.png"></button>
+  <button type="button" class="btn btn-secondary">Round 2 <img class="card-img-bottom" src="/images/noun_Bahrain Grand Prix_189891.png"></button>
+  <button type="button" class="btn btn-secondary">Round 3 <img class="card-img-bottom" src="/images/noun_Bahrain Grand Prix_189891.png"></button>
+  <button type="button" class="btn btn-secondary">Round 1 <img class="card-img-bottom" src="/images/noun_Australian Grand Prix_189890.png"></button>
+  <button type="button" class="btn btn-secondary">Round 2 <img class="card-img-bottom" src="/images/noun_Bahrain Grand Prix_189891.png"></button>
+  <button type="button" class="btn btn-secondary">Round 3 <img class="card-img-bottom" src="/images/noun_Bahrain Grand Prix_189891.png"></button>
+</div> -->
+
+<!-- <div class="card-group">
   <div class="card bg-light text-center">
     <h5 class="card-title text-nowrap">Round 1</h4>
     <p class="card-text">20/03</p>
@@ -43,7 +53,7 @@
     <img class="card-img-bottom" src="/images/noun_Bahrain Grand Prix_189891.png">
     <a href="#" class="stretched-link"></a>
   </div>
-</div>
+</div> -->
 <br/>
 
 <ul class="nav nav-tabs">
@@ -54,10 +64,12 @@
   <a class="nav-link" data-toggle="tab" href="#f1-result">F1 Result</a>
   </li>
 </ul>
+
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="standings" role="tabpanel">
-    <h4 class="text-center table-active">1<sup>st</sup> Division</h4>
-    <table class="table table-hover bg-light">
+    <div class="table-responsive-sm">
+    <table class="table table-sm table-hover bg-light">
+      <h4 class="text-center" style="margin: 0;">1<sup>st</sup> Division</h4>
         <thead>
         <tr class="table-active">
             <th scope="col">#</th>
@@ -107,9 +119,11 @@
         </tr>
         </tbody>
     </table>
-    <h4 class="text-center table-active">2<sup>nd</sup> Division</h4>
-    <table class="table table-hover bg-light">
+    </div>
+    <div class="table-responsive-sm">
+    <table class="table table-sm table-hover bg-light">
         <thead>
+          <h4 class="text-center" style="margin: 0;">2<sup>nd</sup> Division</h4>
         <tr class="table-active">
             <th scope="col">#</th>
             <th scope="col">Team Name</th>
@@ -158,6 +172,7 @@
         </tr>
         </tbody>
     </table>
+    </div>
     <% include engineChassiDriversTable.ejs %>
   </div>
   <div class="tab-pane fade" id="f1-result" role="tabpanel"><h1>F1 Result</h1></div>
