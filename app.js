@@ -3,10 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('dotenv').config()
 
 var standingsRouter = require('./routes/standings');
 var usersRouter = require('./routes/users');
 var myTeamsRouter = require("./routes/myTeams")
+const uri = process.env.DB_URL;
+const mongoose = require('mongoose');
+
+// Connecting with mongo db
+mongoose.Promise = global.Promise;
+mongoose.connect(uri, {
+   useNewUrlParser: true, 
+   useUnifiedTopology: true 
+}).then(() => {
+      console.log('Database sucessfully connected')
+   },
+   error => {
+      console.log('Database could not connected: ' + error)
+   }
+)
 
 var app = express();
 
