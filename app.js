@@ -23,6 +23,8 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
 const PASSPORT_SECRET = process.env.PASSPORT_SECRET;
+const Driver = require('./models/drivers');
+const Team = require("./models/teams");
 
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
@@ -77,8 +79,7 @@ app.get('/error', (req, res) => res.send("error logging in"));
 
 //app.use('/users', usersRouter);
 // app.use("/myTeams", myTeamsRouter);
-const Driver = require('./models/drivers');
-const Team = require("./models/teams")
+
 
 /* GET home page. */
 app.get('/myTeams', async function(req, res, next) {
@@ -112,9 +113,7 @@ app.get('/myTeams', async function(req, res, next) {
       }
     });
     // If successful run the DB query for that user team
-  if (TeamData != null && DriverData != null) {
     res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData });
-  }
 });
 
 // catch 404 and forward to error handler
