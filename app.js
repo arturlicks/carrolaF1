@@ -73,9 +73,6 @@ app.get('/auth/google/redirect',
   }
 );
 
-/* app.get('/success', (req, res) => {
-  res.render('success', {user: userProfile});
-}); */
 app.get('/error', (req, res) => res.send("error logging in"));
 
 //app.use('/users', usersRouter);
@@ -84,9 +81,8 @@ const Driver = require('./models/drivers');
 const Team = require("./models/teams")
 
 /* GET home page. */
-app.get('/myTeams', function(req, res, next) {
-// Auth Google first
-  Team.find({ email: userProfile.emails[0].value },(error, teamData) =>{
+app.get('/myTeams', async function(req, res, next) {
+/*   Team.find({ email: userProfile.emails[0].value },(error, teamData) =>{
     if (error) {
       // Create the user in the database
       return next(error);
@@ -100,9 +96,25 @@ app.get('/myTeams', function(req, res, next) {
         }
       });
     }
-  });
-// If successful run the DB query for that user team
-  
+  }); */
+  let TeamData = await Team.find({ email: userProfile.emails[0].value },(error, teamData) =>{
+      if (error) {
+        return next(error);
+      } else {
+        return teamData;
+      }
+    });
+  let DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return data;
+      }
+    });
+    // If successful run the DB query for that user team
+  if (TeamData != null && DriverData != null) {
+    res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData });
+  }
 });
 
 // catch 404 and forward to error handler
