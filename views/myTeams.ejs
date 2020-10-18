@@ -3,7 +3,11 @@
 <h2 class="text-center"><%= user.displayName %></h2>
 <div class="row row-cols-md-2">
     <div class="col">
-        <h4 class="text-center"><%= teamData[0].teamName %></h4>
+        <% if ( !teamData[0].teamName ) {%>
+            <input type="text" name="team2Name" />
+        <%} else { %>
+            <h4 class="text-center"><%= teamData[0].teamName %></h4>
+        <% } %>
         <table class="table table-hover">
             <thead>
             <tr class="table-active">
@@ -60,7 +64,11 @@
         </table>
     </div>
     <div class="col">
-        <h4 class="text-center"><%= teamData[1].teamName %></h4>
+        <% if ( !teamData[1].teamName ) {%>
+            <input type="text" name="team2Name" />
+        <%} else { %>
+            <h4 class="text-center"><%= teamData[1].teamName %></h4>
+        <% } %>
         <table class="table table-hover">
             <thead>
             <tr class="table-active">
