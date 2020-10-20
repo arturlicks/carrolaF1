@@ -105,6 +105,10 @@ app.get('/myTeams', async function(req, res, next) {
         return teamData;
       }
     });
+  if (Object.keys(TeamData).length === 0) { 
+    TeamData = [{ email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }, { email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }];
+    // Team.insertMany(arr, function(error, docs) {});
+  }
   let DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
       if (error) {
         return next(error);
