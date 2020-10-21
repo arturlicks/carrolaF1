@@ -15,9 +15,19 @@
 <body class="bg-light">
     <div class="container-md bg-white">
         <nav class="navbar navbar-dark bg-dark" id="navbarNav">
-            <a class="navbar-brand" href="./">
+            <a class="navbar-brand" href="/">
               <img src="/images/IMG_0442.JPG" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
               Carrola F1
             </a>
-            <a class="nav-link btn btn-secondary" href="./auth/google">My Team</a>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Admin
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                  <a class="dropdown-item" href="./admin/drivers">Drivers</a>
+                  <a class="dropdown-item" href="#">Teams</a>
+                  <a class="dropdown-item" href="#">Chassi</a>
+                </div>
+              </div>
+            <a class="nav-link btn btn-secondary" href="/auth/google">My Team</a>
         </nav>
