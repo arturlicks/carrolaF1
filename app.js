@@ -80,6 +80,9 @@ app.get('/error', (req, res) => res.send("error logging in"));
 //app.use('/users', usersRouter);
 // app.use("/myTeams", myTeamsRouter);
 
+app.get('/admin/drivers', (req, res) => {
+  res.render("admin/manageDrivers");
+})
 
 /* GET home page. */
 app.get('/myTeams', async function(req, res, next) {
@@ -117,7 +120,20 @@ app.get('/myTeams', async function(req, res, next) {
       }
     });
     // If successful run the DB query for that user team
-    res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData });
+    res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0 });
+});
+
+app.post('/myTeams', async function(req, res, next) {
+  console.log(req.header.driversList);
+  let TeamData = [{ email: userProfile.emails[0].value, driver1: req.body.team1Driver1, driver2: req.body.team1Driver2, teamName: "" }, { email: userProfile.emails[0].value, driver1: req.body.team2Driver1, driver2: req.body.team2Driver2, teamName: "" }];
+  let DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      return data;
+    }
+  });
+  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 1 });
 });
 
 // catch 404 and forward to error handler
