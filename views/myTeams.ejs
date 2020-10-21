@@ -1,89 +1,29 @@
 <% include header.ejs %>
 
 <h2 class="text-center"><%= user.displayName %></h2>
-<div class="row row-cols-md-2">
-    <div class="col">
-        <% if ( !teamData[0].teamName ) {%>
-            <input class="form-control" type="text" name="team2Name" placeholder="Team Name" required />
-        <%} else { %>
-            <h4 class="text-center"><%= teamData[0].teamName %></h4>
-        <% } %>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-active">
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row" class="font-weight-bold"> Driver 1</td>
-                <td>
-                <select class="custom-select custom-select-sm" name="team1Driver1" id="team1Driver1">
-                    <% driversList.forEach(function(driverName) { %>
-                        <% if ( driverName.lastName == teamData[0].driver1 ) {%>
-                            <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
-                        <%} else { %>
-                            <option value="<%= driverName %>"><%= driverName.lastName %></option>
-                        <% } %>
-                    <% }) %>
-                </select>
-                </td>
-                <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-                </svg>
-                </td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Driver 2</td>
-                <td>
-                    <select class="custom-select custom-select-sm" name="team1Driver2" id="team1Driver2">
-                        <% driversList.forEach(function(driverName) { %>
-                            <% if ( driverName.lastName == teamData[0].driver2 ) {%>
-                                <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
-                            <%} else { %>
-                                <option value="<%= driverName %>"><%= driverName.lastName %></option>
-                            <% } %>
-                        <% }) %>
-                    </select>   
-                </td>
-                <td>300</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Chassi</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Engine</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col">
-        <% if ( !teamData[1].teamName ) {%>
-            <input type="text" class="form-control" name="team2Name" placeholder="Team Name" required />
-        <%} else { %>
-            <h4 class="text-center"><%= teamData[1].teamName %></h4>
-        <% } %>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-active">
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
+<form method="POST" action="/myTeams">
+    <div class="row row-cols-md-2">
+        <div class="col">
+            <% if ( !teamData[0].teamName ) {%>
+                <input class="form-control" type="text" name="team1Name" placeholder="Team Name" required />
+            <%} else { %>
+                <h4 class="text-center"><%= teamData[0].teamName %></h4>
+            <% } %>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Value</th>
+                </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td scope="row" class="font-weight-bold"> Driver 1</td>
                     <td>
-                    <select class="custom-select custom-select-sm" name="team2Driver1" id="team2Driver1">
+                    <select class="custom-select custom-select-sm" name="team1Driver1" id="team1Driver1">
                         <% driversList.forEach(function(driverName) { %>
-                            <% if ( driverName.lastName == teamData[1].driver1 ) {%>
+                            <% if ( driverName.lastName == teamData[0].driver1 ) {%>
                                 <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
                             <%} else { %>
                                 <option value="<%= driverName %>"><%= driverName.lastName %></option>
@@ -99,9 +39,9 @@
                 <tr>
                     <td scope="row" class="font-weight-bold">Driver 2</td>
                     <td>
-                        <select class="custom-select custom-select-sm" name="team2Driver2" id="team2Driver2">
+                        <select class="custom-select custom-select-sm" name="team1Driver2" id="team1Driver2">
                             <% driversList.forEach(function(driverName) { %>
-                                <% if ( driverName.lastName == teamData[1].driver2 ) {%>
+                                <% if ( driverName.lastName == teamData[0].driver2 ) {%>
                                     <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
                                 <%} else { %>
                                     <option value="<%= driverName %>"><%= driverName.lastName %></option>
@@ -111,25 +51,95 @@
                     </td>
                     <td>300</td>
                 </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Chassi</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Engine</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Chassi</td>
+                    <td>Renault</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Engine</td>
+                    <td>Renault</td>
+                    <td>100</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <% if ( !teamData[1].teamName ) {%>
+                <input type="text" class="form-control" name="team2Name" placeholder="Team Name" required />
+            <%} else { %>
+                <h4 class="text-center"><%= teamData[1].teamName %></h4>
+            <% } %>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row" class="font-weight-bold"> Driver 1</td>
+                        <td>
+                        <select class="custom-select custom-select-sm" name="team2Driver1" id="team2Driver1">
+                            <% driversList.forEach(function(driverName) { %>
+                                <% if ( driverName.lastName == teamData[1].driver1 ) {%>
+                                    <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                                <%} else { %>
+                                    <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                <% } %>
+                            <% }) %>
+                        </select>
+                        </td>
+                        <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                        </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row" class="font-weight-bold">Driver 2</td>
+                        <td>
+                            <select class="custom-select custom-select-sm" name="team2Driver2" id="team2Driver2">
+                                <% driversList.forEach(function(driverName) { %>
+                                    <% if ( driverName.lastName == teamData[1].driver2 ) {%>
+                                        <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                                    <%} else { %>
+                                        <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                    <% } %>
+                                <% }) %>
+                            </select>   
+                        </td>
+                        <td>300</td>
+                    </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Chassi</td>
+                    <td>Renault</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Engine</td>
+                    <td>Renault</td>
+                    <td>100</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<div class="row mb-3">
-    <div class="col text-center">
-        <button type="button" class="btn btn-outline-success w-50">Save changes</button>
+    <% if (showSuccess == 1) {%>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Changes saved!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-outline-success w-50">Save changes</button>
+        </div>
     </div>
-</div>
+</form>
 <% include engineChassiDriversTable.ejs %>
 
 <% include footer.ejs %>
