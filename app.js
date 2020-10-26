@@ -119,6 +119,7 @@ app.get('/myTeams', async function(req, res, next) {
         return data;
       }
     });
+    console.log(TeamData[0].team1Driver1);
     // If successful run the DB query for that user team
     res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0 });
 });

@@ -9,19 +9,34 @@ let Team = new Schema({
     email: {
         type: String
     },
-    driver1: {
+    team1Driver1: {
         type: String
     },
-    driver2: {
+    team1Driver2: {
     type: String
     },
-    chassi: {
+    team1Chassi: {
         type: String
     },
-    engine: {
+    team1Engine: {
         type: String
     },
-    teamName: {
+    team1Name: {
+        type: String
+    },
+    team2Driver1: {
+        type: String
+    },
+    team2Driver2: {
+    type: String
+    },
+    team2Chassi: {
+        type: String
+    },
+    team2Engine: {
+        type: String
+    },
+    team2Name: {
         type: String
     }
 }, {
