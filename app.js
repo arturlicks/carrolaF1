@@ -27,10 +27,11 @@ const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
 const PASSPORT_SECRET = process.env.PASSPORT_SECRET;
 
 // Connecting with mongo db
-var TeamData, DriverData, EngineData;
+var TeamData, DriverData, EngineData, ChassiData;
 const Driver = require('./models/drivers');
 const Team = require("./models/teams");
 const Engine = require("./models/engines");
+const Chassi = require("./models/chassis");
 const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 mongoose.Promise = global.Promise;
 mongoose.connect(uri, {
@@ -118,7 +119,15 @@ app.get('/myTeams', async function(req, res, next) {
     }
   });
 
-  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData });
+  ChassiData = await Chassi.find({}, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      return data;
+    }
+  });
+
+  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData, chassisList: ChassiData });
 });
 
 app.post('/myTeams', async function(req, res, next) {
@@ -136,7 +145,7 @@ app.post('/myTeams', async function(req, res, next) {
   saveTeam.team2Engine = req.body.team2Engine;
   saveTeam.team2Chassi = req.body.team2Chassi;
   await saveTeam.save();
-  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1, enginesList: EngineData });
+  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1, enginesList: EngineData, chassisList: ChassiData });
 });
 
 // catch 404 and forward to error handler
