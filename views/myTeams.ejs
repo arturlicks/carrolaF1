@@ -60,7 +60,15 @@
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Engine</td>
-                    <td>Renault</td>
+                    <td><select class="custom-select custom-select-sm" name="team1Engine">
+                        <% enginesList.forEach(function(engineName) { %>
+                            <% if ( engineName.name == teamData.team1Engine ) {%>
+                                <option value="<%= engineName.name %>" selected><%= engineName.name %></option>
+                            <%} else { %>
+                                <option value="<%= engineName.name %>"><%= engineName.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select></td>
                     <td>100</td>
                 </tr>
                 </tbody>
@@ -122,7 +130,15 @@
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Engine</td>
-                    <td>Renault</td>
+                    <td><select class="custom-select custom-select-sm" name="team2Engine">
+                        <% enginesList.forEach(function(engineName) { %>
+                            <% if ( engineName.name == teamData.team2Engine ) {%>
+                                <option value="<%= engineName.name %>" selected><%= engineName.name %></option>
+                            <%} else { %>
+                                <option value="<%= engineName.name %>"><%= engineName.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select></td>
                     <td>100</td>
                 </tr>
                 </tbody>
