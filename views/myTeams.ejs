@@ -4,10 +4,10 @@
 <form method="POST" action="/myTeams">
     <div class="row row-cols-md-2">
         <div class="col">
-            <% if ( !teamData[0].team1Name ) {%>
+            <% if ( !teamData.team1Name ) {%>
                 <input class="form-control" type="text" name="team1Name" placeholder="Team Name" required />
             <%} else { %>
-                <h4 class="text-center"><%= teamData[0].team1Name %></h4>
+                <h4 class="text-center"><%= teamData.team1Name %></h4>
             <% } %>
             <table class="table table-hover">
                 <thead>
@@ -23,10 +23,10 @@
                     <td>
                     <select class="custom-select custom-select-sm" name="team1Driver1" id="team1Driver1">
                         <% driversList.forEach(function(driverName) { %>
-                            <% if ( driverName.lastName == teamData[0].team1Driver1 ) {%>
-                                <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                            <% if ( driverName.lastName == teamData.team1Driver1 ) {%>
+                                <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
                             <%} else { %>
-                                <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
                             <% } %>
                         <% }) %>
                     </select>
@@ -41,10 +41,10 @@
                     <td>
                         <select class="custom-select custom-select-sm" name="team1Driver2" id="team1Driver2">
                             <% driversList.forEach(function(driverName) { %>
-                                <% if ( driverName.lastName == teamData[0].team1Driver2 ) {%>
-                                    <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                                <% if ( driverName.lastName == teamData.team1Driver2 ) {%>
+                                    <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
                                 <%} else { %>
-                                    <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
                                 <% } %>
                             <% }) %>
                         </select>   
@@ -65,10 +65,10 @@
             </table>
         </div>
         <div class="col">
-            <% if ( !teamData[0].team2Name ) {%>
+            <% if ( !teamData.team2Name ) {%>
                 <input type="text" class="form-control" name="team2Name" placeholder="Team Name" required />
             <%} else { %>
-                <h4 class="text-center"><%= teamData[0].team2Name %></h4>
+                <h4 class="text-center"><%= teamData.team2Name %></h4>
             <% } %>
             <table class="table table-hover">
                 <thead>
@@ -84,10 +84,10 @@
                         <td>
                         <select class="custom-select custom-select-sm" name="team2Driver1" id="team2Driver1">
                             <% driversList.forEach(function(driverName) { %>
-                                <% if ( driverName.lastName == teamData[0].team2Driver1 ) {%>
-                                    <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                                <% if ( driverName.lastName == teamData.team2Driver1 ) {%>
+                                    <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
                                 <%} else { %>
-                                    <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
                                 <% } %>
                             <% }) %>
                         </select>
@@ -102,10 +102,10 @@
                         <td>
                             <select class="custom-select custom-select-sm" name="team2Driver2" id="team2Driver2">
                                 <% driversList.forEach(function(driverName) { %>
-                                    <% if ( driverName.lastName == teamData[0].team2Driver2 ) {%>
-                                        <option value="<%= driverName %>" selected><%= driverName.lastName %></option>
+                                    <% if ( driverName.lastName == teamData.team2Driver2 ) {%>
+                                        <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
                                     <%} else { %>
-                                        <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                                        <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
                                     <% } %>
                                 <% }) %>
                             </select>   

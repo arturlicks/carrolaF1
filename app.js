@@ -12,6 +12,8 @@ const uri = process.env.DB_URL;
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+
+
 /*  PASSPORT SETUP  */
 
 const passport = require('passport');
@@ -23,10 +25,11 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
 const PASSPORT_SECRET = process.env.PASSPORT_SECRET;
-const Driver = require('./models/drivers');
-const Team = require("./models/teams");
 
 // Connecting with mongo db
+var TeamData, DriverData;
+const Driver = require('./models/drivers');
+const Team = require("./models/teams");
 mongoose.Promise = global.Promise;
 mongoose.connect(uri, {
    useNewUrlParser: true, 
@@ -86,22 +89,7 @@ app.get('/admin/drivers', (req, res) => {
 
 /* GET home page. */
 app.get('/myTeams', async function(req, res, next) {
-/*   Team.find({ email: userProfile.emails[0].value },(error, teamData) =>{
-    if (error) {
-      // Create the user in the database
-      return next(error);
-    } else {
-      //console.log(teamData);
-      Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
-        if (error) {
-          return next(error);
-        } else {
-          res.render('myTeams', { driversList : data, user: userProfile, teamData: teamData });
-        }
-      });
-    }
-  }); */
-  let TeamData = await Team.find({ email: userProfile.emails[0].value },(error, teamData) =>{
+  TeamData = await Team.findOne({ email: userProfile.emails[0].value },(error, teamData) =>{
       if (error) {
         return next(error);
       } else {
@@ -112,29 +100,25 @@ app.get('/myTeams', async function(req, res, next) {
     TeamData = [{ email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }, { email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }];
     // Team.insertMany(arr, function(error, docs) {});
   }
-  let DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
+  DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
       if (error) {
         return next(error);
       } else {
         return data;
       }
     });
-    console.log(TeamData[0].team1Driver1);
-    // If successful run the DB query for that user team
     res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0 });
 });
 
 app.post('/myTeams', async function(req, res, next) {
-  console.log(req.header.driversList);
-  let TeamData = [{ email: userProfile.emails[0].value, driver1: req.body.team1Driver1, driver2: req.body.team1Driver2, teamName: "" }, { email: userProfile.emails[0].value, driver1: req.body.team2Driver1, driver2: req.body.team2Driver2, teamName: "" }];
-  let DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      return data;
-    }
-  });
-  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 1 });
+
+  let saveTeam = new Team(TeamData);
+  saveTeam.team1Driver1 = req.body.team1Driver1;
+  saveTeam.team1Driver2 = req.body.team1Driver2;
+  saveTeam.team2Driver1 = req.body.team2Driver1;
+  saveTeam.team2Driver2 = req.body.team2Driver2;
+  await saveTeam.save();
+  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1 });
 });
 
 // catch 404 and forward to error handler
