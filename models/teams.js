@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema
 let Team = new Schema({
-    owner: {
+    teamOwner: {
         type: String
     },
     email: {
