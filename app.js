@@ -86,10 +86,6 @@ app.get('/error', (req, res) => res.send("error logging in"));
 //app.use('/users', usersRouter);
 // app.use("/myTeams", myTeamsRouter);
 
-app.get('/admin/drivers', (req, res) => {
-  res.render("admin/manageDrivers");
-})
-
 /* GET home page. */
 app.get('/myTeams', async function(req, res, next) {
   TeamData = await Team.findOne({ email: userProfile.emails[0].value },(error, teamData) =>{
@@ -103,7 +99,7 @@ app.get('/myTeams', async function(req, res, next) {
     TeamData = [{ email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }, { email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }];
     // Team.insertMany(arr, function(error, docs) {});
   }
-  DriverData = await Driver.find({}, {"_id": 0,"lastName": 1}, (error, data) => {
+  DriverData = await Driver.find({}, (error, data) => {
       if (error) {
         return next(error);
       } else {
@@ -127,7 +123,7 @@ app.get('/myTeams', async function(req, res, next) {
     }
   });
 
-  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData, chassisList: ChassiData });
+  res.render('myTeams', { driversList: DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData, chassisList: ChassiData });
 });
 
 app.post('/myTeams', async function(req, res, next) {
@@ -145,7 +141,21 @@ app.post('/myTeams', async function(req, res, next) {
   saveTeam.team2Engine = req.body.team2Engine;
   saveTeam.team2Chassi = req.body.team2Chassi;
   await saveTeam.save();
-  res.render('myTeams', { driversList : DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1, enginesList: EngineData, chassisList: ChassiData });
+  res.render('myTeams', { driversList: DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1, enginesList: EngineData, chassisList: ChassiData });
+});
+
+app.get('/admin/drivers', async function(req, res) {
+  
+  if (!DriverData){
+    DriverData = await Driver.find({}, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return data;
+      }
+    });
+  }
+  res.render('admin/manageDrivers', { driversList: DriverData });
 });
 
 // catch 404 and forward to error handler
