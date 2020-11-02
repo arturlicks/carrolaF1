@@ -26,16 +26,17 @@
                     <select class="custom-select custom-select-sm" name="team1Driver1" id="team1Driver1">
                         <% driversList.forEach(function(driverName) { %>
                             <% if ( driverName.lastName == teamData.team1Driver1 ) {%>
-                                <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
+                                <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
                             <%} else { %>
-                                <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
+                                <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
                             <% } %>
                         <% }) %>
                     </select>
                     </td>
-                    <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <td class="text-success"><span id="team1Driver1value"></span>
+                        <!-- 500<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-                    </svg>
+                    </svg> -->
                     </td>
                 </tr>
                 <tr>
@@ -44,23 +45,23 @@
                         <select class="custom-select custom-select-sm" name="team1Driver2" id="team1Driver2">
                             <% driversList.forEach(function(driverName) { %>
                                 <% if ( driverName.lastName == teamData.team1Driver2 ) {%>
-                                    <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
                                 <%} else { %>
-                                    <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
                                 <% } %>
                             <% }) %>
                         </select>   
                     </td>
-                    <td>300</td>
+                    <td><span id="team1Driver2value"></span></td>
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Chassi</td>
                     <td><select class="custom-select custom-select-sm" name="team1Chassi">
                         <% chassisList.forEach(function(chassiName) { %>
                             <% if ( chassiName.name == teamData.team1Chassi ) {%>
-                                <option value="<%= chassiName.name %>" selected><%= chassiName.name %></option>
+                                <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
                             <%} else { %>
-                                <option value="<%= chassiName.name %>"><%= chassiName.name %></option>
+                                <option value="<%= chassiName.value %>"><%= chassiName.name %></option>
                             <% } %>
                         <% }) %>
                     </select></td>
@@ -71,9 +72,9 @@
                     <td><select class="custom-select custom-select-sm" name="team1Engine">
                         <% enginesList.forEach(function(engineName) { %>
                             <% if ( engineName.name == teamData.team1Engine ) {%>
-                                <option value="<%= engineName.name %>" selected><%= engineName.name %></option>
+                                <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
                             <%} else { %>
-                                <option value="<%= engineName.name %>"><%= engineName.name %></option>
+                                <option value="<%= engineName.value %>"><%= engineName.name %></option>
                             <% } %>
                         <% }) %>
                     </select></td>
@@ -104,16 +105,17 @@
                         <select class="custom-select custom-select-sm" name="team2Driver1" id="team2Driver1">
                             <% driversList.forEach(function(driverName) { %>
                                 <% if ( driverName.lastName == teamData.team2Driver1 ) {%>
-                                    <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
                                 <%} else { %>
-                                    <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
+                                    <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
                                 <% } %>
                             <% }) %>
                         </select>
                         </td>
-                        <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <td class="text-success"><span id="team2Driver1value"></span> 
+                        <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-                        </svg>
+                        </svg> -->
                         </td>
                     </tr>
                     <tr>
@@ -122,23 +124,23 @@
                             <select class="custom-select custom-select-sm" name="team2Driver2" id="team2Driver2">
                                 <% driversList.forEach(function(driverName) { %>
                                     <% if ( driverName.lastName == teamData.team2Driver2 ) {%>
-                                        <option value="<%= driverName.lastName %>" selected><%= driverName.lastName %></option>
+                                        <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
                                     <%} else { %>
-                                        <option value="<%= driverName.lastName %>"><%= driverName.lastName %></option>
+                                        <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
                                     <% } %>
                                 <% }) %>
                             </select>   
                         </td>
-                        <td>300</td>
+                        <td><span id="team2Driver2value"></span></td>
                     </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Chassi</td>
                     <td><select class="custom-select custom-select-sm" name="team2Chassi">
                         <% chassisList.forEach(function(chassiName) { %>
                             <% if ( chassiName.name == teamData.team2Chassi ) {%>
-                                <option value="<%= chassiName.name %>" selected><%= chassiName.name %></option>
+                                <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
                             <%} else { %>
-                                <option value="<%= chassiName.name %>"><%= chassiName.name %></option>
+                                <option value="<%= chassiName.value %>"><%= chassiName.name %></option>
                             <% } %>
                         <% }) %>
                     </select></td>
@@ -149,9 +151,9 @@
                     <td><select class="custom-select custom-select-sm" name="team2Engine">
                         <% enginesList.forEach(function(engineName) { %>
                             <% if ( engineName.name == teamData.team2Engine ) {%>
-                                <option value="<%= engineName.name %>" selected><%= engineName.name %></option>
+                                <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
                             <%} else { %>
-                                <option value="<%= engineName.name %>"><%= engineName.name %></option>
+                                <option value="<%= engineName.value %>"><%= engineName.name %></option>
                             <% } %>
                         <% }) %>
                     </select></td>
@@ -175,6 +177,9 @@
         </div>
     </div>
 </form>
+
+<script src="/javascripts/myTeams.js"></script>
+
 <% include engineChassiDriversTable.ejs %>
 
 <% include footer.ejs %>
