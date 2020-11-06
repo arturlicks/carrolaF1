@@ -3,6 +3,10 @@ $(document).ready(function(){
     $('#team1Driver2value').text($("#team1Driver2").children("option:selected").val());
     $('#team2Driver1value').text($("#team2Driver1").children("option:selected").val());
     $('#team2Driver2value').text($("#team2Driver2").children("option:selected").val());
+    $('#hiddenTeam1Driver1').val($("#team1Driver1").children("option:selected").text());
+    $('#hiddenTeam1Driver2').val($("#team1Driver2").children("option:selected").text());
+    $('#hiddenTeam2Driver1').val($("#team2Driver1").children("option:selected").text());
+    $('#hiddenTeam2Driver2').val($("#team2Driver2").children("option:selected").text());
 });
 $("#team1Driver1").change(function(){
     $('#team1Driver1value').text($("#team1Driver1").children("option:selected").val());
