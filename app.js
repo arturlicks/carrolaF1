@@ -131,13 +131,13 @@ app.post('/myTeams', async function(req, res, next) {
   let saveTeam = new Team(TeamData);
   saveTeam.teamOwner = req.body.teamOwner;
   saveTeam.team1Name = req.body.team1Name;
-  saveTeam.team1Driver1 = req.body.team1Driver1;
-  saveTeam.team1Driver2 = req.body.team1Driver2;
+  saveTeam.team1Driver1 = req.body.hiddenTeam1Driver1;
+  saveTeam.team1Driver2 = req.body.hiddenTeam1Driver2;
   saveTeam.team1Engine = req.body.team1Engine;
   saveTeam.team1Chassi = req.body.team1Chassi;
   saveTeam.team2Name = req.body.team2Name;
-  saveTeam.team2Driver1 = req.body.team2Driver1;
-  saveTeam.team2Driver2 = req.body.team2Driver2;
+  saveTeam.team2Driver1 = req.body.hiddenTeam2Driver1;
+  saveTeam.team2Driver2 = req.body.hiddenTeam2Driver2;
   saveTeam.team2Engine = req.body.team2Engine;
   saveTeam.team2Chassi = req.body.team2Chassi;
   await saveTeam.save();
