@@ -133,13 +133,13 @@ app.post('/myTeams', async function(req, res, next) {
   saveTeam.team1Name = req.body.team1Name;
   saveTeam.team1Driver1 = req.body.hiddenTeam1Driver1;
   saveTeam.team1Driver2 = req.body.hiddenTeam1Driver2;
-  saveTeam.team1Engine = req.body.team1Engine;
-  saveTeam.team1Chassi = req.body.team1Chassi;
+  saveTeam.team1Engine = req.body.hiddenTeam1Engine;
+  saveTeam.team1Chassi = req.body.hiddenTeam1Chassi;
   saveTeam.team2Name = req.body.team2Name;
   saveTeam.team2Driver1 = req.body.hiddenTeam2Driver1;
   saveTeam.team2Driver2 = req.body.hiddenTeam2Driver2;
-  saveTeam.team2Engine = req.body.team2Engine;
-  saveTeam.team2Chassi = req.body.team2Chassi;
+  saveTeam.team2Engine = req.body.hiddenTeam2Engine;
+  saveTeam.team2Chassi = req.body.hiddenTeam2Chassi;
   await saveTeam.save();
   res.render('myTeams', { driversList: DriverData, user: userProfile, teamData: saveTeam, showSuccess: 1, enginesList: EngineData, chassisList: ChassiData });
 });
