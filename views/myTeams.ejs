@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Chassi</td>
-                    <td><select class="custom-select custom-select-sm" name="team1Chassi">
+                    <td><select class="custom-select custom-select-sm" name="team1Chassi" id="team1Chassi">
                         <% chassisList.forEach(function(chassiName) { %>
                             <% if ( chassiName.name == teamData.team1Chassi ) {%>
                                 <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
@@ -65,11 +65,11 @@
                             <% } %>
                         <% }) %>
                     </select></td>
-                    <td class="text-center">100</td>
+                    <td class="text-center"><span id="team1Chassivalue"></span><input type="hidden" id="hiddenTeam1Chassi" name="hiddenTeam1Chassi"></td>
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Engine</td>
-                    <td><select class="custom-select custom-select-sm" name="team1Engine">
+                    <td><select class="custom-select custom-select-sm" name="team1Engine" id="team1Engine">
                         <% enginesList.forEach(function(engineName) { %>
                             <% if ( engineName.name == teamData.team1Engine ) {%>
                                 <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
@@ -78,7 +78,7 @@
                             <% } %>
                         <% }) %>
                     </select></td>
-                    <td class="text-center">100</td>
+                    <td class="text-center"><span id="team1Enginevalue"></span><input type="hidden" id="hiddenTeam1Engine" name="hiddenTeam1Engine"></td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Credits</td>
@@ -140,7 +140,7 @@
                     </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Chassi</td>
-                    <td><select class="custom-select custom-select-sm" name="team2Chassi">
+                    <td><select class="custom-select custom-select-sm" name="team2Chassi" id="team2Chassi">
                         <% chassisList.forEach(function(chassiName) { %>
                             <% if ( chassiName.name == teamData.team2Chassi ) {%>
                                 <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
@@ -149,11 +149,11 @@
                             <% } %>
                         <% }) %>
                     </select></td>
-                    <td class="text-center">100</td>
+                    <td class="text-center"><span id="team2Chassivalue"></span><input type="hidden" id="hiddenTeam2Chassi" name="hiddenTeam2Chassi"></td>
                 </tr>
                 <tr>
                     <td scope="row" class="font-weight-bold">Engine</td>
-                    <td><select class="custom-select custom-select-sm" name="team2Engine">
+                    <td><select class="custom-select custom-select-sm" name="team2Engine" id="team2Engine">
                         <% enginesList.forEach(function(engineName) { %>
                             <% if ( engineName.name == teamData.team2Engine ) {%>
                                 <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
@@ -162,7 +162,7 @@
                             <% } %>
                         <% }) %>
                     </select></td>
-                    <td class="text-center">100</td>
+                    <td class="text-center"><span id="team2Enginevalue"></span><input type="hidden" id="hiddenTeam2Engine" name="hiddenTeam2Engine"></td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">Credits</td>
