@@ -38,6 +38,12 @@ let Team = new Schema({
     },
     team2Name: {
         type: String
+    },
+    creditsTeam1: {
+        type: Number
+    },
+    creditsTeam2: {
+        type: Number
     }
 }, {
    collection: 'teams'
