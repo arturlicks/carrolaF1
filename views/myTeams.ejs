@@ -1,105 +1,195 @@
 <% include header.ejs %>
 
-<div class="row row-cols-md-2">
-    <div class="col">
-        <h4 class="text-center">Team 1</h4>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-active">
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row" class="font-weight-bold"> Piloto 1</td>
-                <td>
-                <select class="custom-select custom-select-sm" name="cars" id="cars">
-                    <% driversList.forEach(function(driverName) { %>
-                        <option value="<%= driverName %>"><%= driverName.lastName %></option>
-                    <% }) %>
-                </select>
-                </td>
-                <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-                </svg>
-                </td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Piloto 2</td>
-                <td>
-                    <select class="custom-select custom-select-sm" name="cars" id="cars">
+<h2 class="text-center"><%= user.displayName %></h2>
+<form method="POST" action="/myTeams">
+    <input type="hidden" name="teamOwner" value="<%= user.displayName %>">
+    <div class="row row-cols-md-2">
+        <div class="col">
+            <% if ( !teamData.team1Name ) {%>
+                <input class="form-control" type="text" name="team1Name" placeholder="Team Name" required />
+            <%} else { %>
+                <h4 class="text-center"><%= teamData.team1Name %></h4>
+                <input type="hidden" name="team1Name" value="<%= teamData.team1Name %>">
+            <% } %>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col" class="text-center">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row" class="font-weight-bold"> Driver 1</td>
+                    <td>
+                    <select class="custom-select custom-select-sm" name="team1Driver1" id="team1Driver1">
                         <% driversList.forEach(function(driverName) { %>
-                            <option value="<%= driverName %>"><%= driverName.lastName %></option>
-                        <% }) %>
-                    </select>   
-                </td>
-                <td>300</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Chassi</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Motor</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col">
-        <h4 class="text-center">Team 2</h4>
-        <table class="table table-hover">
-            <thead>
-            <tr class="table-active">
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row" class="font-weight-bold"> Piloto 1</td>
-                <td>
-                    <select class="custom-select custom-select-sm" name="cars" id="cars">
-                        <% driversList.forEach(function(driverName) { %>
-                            <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                            <% if ( driverName.lastName == teamData.team1Driver1 ) {%>
+                                <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
+                            <%} else { %>
+                                <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
+                            <% } %>
                         <% }) %>
                     </select>
-                </td>
-                <td class="text-success">500 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-                </svg>
-                </td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Piloto 2</td>
-                <td>
-                    <select class="custom-select custom-select-sm" name="cars" id="cars">
-                        <% driversList.forEach(function(driverName) { %>
-                            <option value="<%= driverName %>"><%= driverName.lastName %></option>
+                    </td>
+                    <td class="text-center"><span id="team1Driver1value"></span><input type="hidden" id="hiddenTeam1Driver1" name="hiddenTeam1Driver1">
+                        <!-- 500<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                    </svg> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Driver 2</td>
+                    <td>
+                        <select class="custom-select custom-select-sm" name="team1Driver2" id="team1Driver2">
+                            <% driversList.forEach(function(driverName) { %>
+                                <% if ( driverName.lastName == teamData.team1Driver2 ) {%>
+                                    <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
+                                <%} else { %>
+                                    <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
+                                <% } %>
+                            <% }) %>
+                        </select>   
+                    </td>
+                    <td class="text-center"><span id="team1Driver2value"></span><input type="hidden" id="hiddenTeam1Driver2" name="hiddenTeam1Driver2"></td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Chassi</td>
+                    <td><select class="custom-select custom-select-sm" name="team1Chassi" id="team1Chassi">
+                        <% chassisList.forEach(function(chassiName) { %>
+                            <% if ( chassiName.name == teamData.team1Chassi ) {%>
+                                <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
+                            <%} else { %>
+                                <option value="<%= chassiName.value %>"><%= chassiName.name %></option>
+                            <% } %>
                         <% }) %>
-                    </select>
-                </td>
-                <td>300</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Chassi</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td scope="row" class="font-weight-bold">Motor</td>
-                <td>Renault</td>
-                <td>100</td>
-            </tr>
-            </tbody>
-        </table>
+                    </select></td>
+                    <td class="text-center"><span id="team1Chassivalue"></span><input type="hidden" id="hiddenTeam1Chassi" name="hiddenTeam1Chassi"></td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Engine</td>
+                    <td><select class="custom-select custom-select-sm" name="team1Engine" id="team1Engine">
+                        <% enginesList.forEach(function(engineName) { %>
+                            <% if ( engineName.name == teamData.team1Engine ) {%>
+                                <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
+                            <%} else { %>
+                                <option value="<%= engineName.value %>"><%= engineName.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select></td>
+                    <td class="text-center"><span id="team1Enginevalue"></span><input type="hidden" id="hiddenTeam1Engine" name="hiddenTeam1Engine"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Credits</td>
+                    <td><input type="hidden" name="creditsTeam1" id="creditsTeam1" value="<%= teamData.creditsTeam1 %>"></td>
+                    <td id="tdCreditsTeam1" class="rounded text-center"><span id="team1TotalSum"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <% if ( !teamData.team2Name ) {%>
+                <input type="text" class="form-control" name="team2Name" placeholder="Team Name" required />
+            <%} else { %>
+                <h4 class="text-center"><%= teamData.team2Name %></h4>
+                <input type="hidden" name="team2Name" value="<%= teamData.team2Name %>">
+            <% } %>
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col" class="text-center">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row" class="font-weight-bold"> Driver 1</td>
+                        <td>
+                        <select class="custom-select custom-select-sm" name="team2Driver1" id="team2Driver1">
+                            <% driversList.forEach(function(driverName) { %>
+                                <% if ( driverName.lastName == teamData.team2Driver1 ) {%>
+                                    <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
+                                <%} else { %>
+                                    <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
+                                <% } %>
+                            <% }) %>
+                        </select>
+                        </td>
+                        <td class="text-center"><span id="team2Driver1value"></span><input type="hidden" id="hiddenTeam2Driver1" name="hiddenTeam2Driver1">
+                        <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                        </svg> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row" class="font-weight-bold">Driver 2</td>
+                        <td>
+                            <select class="custom-select custom-select-sm" name="team2Driver2" id="team2Driver2">
+                                <% driversList.forEach(function(driverName) { %>
+                                    <% if ( driverName.lastName == teamData.team2Driver2 ) {%>
+                                        <option value="<%= driverName.value %>" selected><%= driverName.lastName %></option>
+                                    <%} else { %>
+                                        <option value="<%= driverName.value %>"><%= driverName.lastName %></option>
+                                    <% } %>
+                                <% }) %>
+                            </select>   
+                        </td>
+                        <td class="text-center"><span id="team2Driver2value"></span><input type="hidden" id="hiddenTeam2Driver2" name="hiddenTeam2Driver2"></td>
+                    </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Chassi</td>
+                    <td><select class="custom-select custom-select-sm" name="team2Chassi" id="team2Chassi">
+                        <% chassisList.forEach(function(chassiName) { %>
+                            <% if ( chassiName.name == teamData.team2Chassi ) {%>
+                                <option value="<%= chassiName.value %>" selected><%= chassiName.name %></option>
+                            <%} else { %>
+                                <option value="<%= chassiName.value %>"><%= chassiName.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select></td>
+                    <td class="text-center"><span id="team2Chassivalue"></span><input type="hidden" id="hiddenTeam2Chassi" name="hiddenTeam2Chassi"></td>
+                </tr>
+                <tr>
+                    <td scope="row" class="font-weight-bold">Engine</td>
+                    <td><select class="custom-select custom-select-sm" name="team2Engine" id="team2Engine">
+                        <% enginesList.forEach(function(engineName) { %>
+                            <% if ( engineName.name == teamData.team2Engine ) {%>
+                                <option value="<%= engineName.value %>" selected><%= engineName.name %></option>
+                            <%} else { %>
+                                <option value="<%= engineName.value %>"><%= engineName.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select></td>
+                    <td class="text-center"><span id="team2Enginevalue"></span><input type="hidden" id="hiddenTeam2Engine" name="hiddenTeam2Engine"></td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Credits</td>
+                    <td><input type="hidden" name="creditsTeam2" id="creditsTeam2" value="<%= teamData.creditsTeam2 %>"></td>
+                    <td id="tdCreditsTeam2" class="rounded text-center"><span id="team2TotalSum"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    <% if (showSuccess == 1) {%>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Changes saved!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-outline-success w-50">Save changes</button>
+        </div>
+    </div>
+</form>
+
+<script src="/javascripts/myTeams.js"></script>
+
 <% include engineChassiDriversTable.ejs %>
 
 <% include footer.ejs %>

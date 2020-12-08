@@ -12,6 +12,30 @@ let Driver = new Schema({
    team: {
       type: String
    },
+   value: {
+      type: Number
+   },
+   first: {
+      type: Number
+   },
+   second: {
+      type: Number
+   },
+   sixth: {
+      type: Number
+   },
+   eleventh: {
+      type: Number
+   },
+   sixteenth: {
+      type: Number
+   },
+   ninteenth: {
+      type: Number
+   },
+   dnf: {
+      type: Number
+   },
 }, {
    collection: 'drivers'
 })

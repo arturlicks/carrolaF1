@@ -1,0 +1,36 @@
+<% include ../header.ejs %>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-active">
+            <th class="text-center" scope="col">Cost</th>
+            <th class="text-center" scope="col">Driver</th>
+            <th class="text-center" scope="col">Victory</th>
+            <th class="text-center" scope="col">2-5</th>
+            <th class="text-center" scope="col">6-10</th>
+            <th class="text-center" scope="col">11-15</th>
+            <th class="text-center" scope="col">16-18</th>
+            <th class="text-center" scope="col">19-20</th>
+            <th class="text-center" scope="col">DNF</th>
+            <th class="text-center" scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% driversList.forEach(function(driverName) { %>
+            <tr>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.value %>"></td>
+                <td scope="col"><input class="form-control text-center" type="text" value="<%= driverName.lastName %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.first %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.second %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.sixth %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.eleventh %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.sixteenth %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.ninteenth %>"></td>
+                <td scope="col"><input class="form-control text-center" type="number" value="<%= driverName.dnf %>"></td>
+                <td><button type="submit" class="btn btn-outline-success">Save changes</button></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<% include ../footer.ejs %>
