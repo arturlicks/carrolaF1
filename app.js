@@ -88,42 +88,47 @@ app.get('/error', (req, res) => res.send("error logging in"));
 
 /* GET home page. */
 app.get('/myTeams', async function(req, res, next) {
-  TeamData = await Team.findOne({ email: userProfile.emails[0].value },(error, teamData) =>{
-      if (error) {
-        return next(error);
-      } else {
-        return teamData;
-      }
+  try {
+    TeamData = await Team.findOne({ email: userProfile.emails[0].value },(error, data) =>{
+        if (error) {
+          return error;
+        } else {
+          return data;
+        }
     });
-  if (Object.keys(TeamData).length === 0) { 
-    TeamData = [{ email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }, { email: userProfile.emails[0].value, driver1: "", driver2: "", teamName: "" }];
-    // Team.insertMany(arr, function(error, docs) {});
-  }
-  DriverData = await Driver.find({}, (error, data) => {
+    
+    if (!TeamData) {
+      TeamData = new Team({ email: userProfile.emails[0].value });
+    }
+    
+    DriverData = await Driver.find({}, (error, data) => {
+        if (error) {
+          return next(error);
+        } else {
+          return data;
+        }
+    });
+
+    EngineData = await Engine.find({}, (error, data) => {
       if (error) {
         return next(error);
       } else {
         return data;
       }
-  });
+    });
 
-  EngineData = await Engine.find({}, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      return data;
-    }
-  });
+    ChassiData = await Chassi.find({}, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return data;
+      }
+    });
 
-  ChassiData = await Chassi.find({}, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      return data;
-    }
-  });
-
-  res.render('myTeams', { driversList: DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData, chassisList: ChassiData });
+    res.render('myTeams', { driversList: DriverData, user: userProfile, teamData: TeamData, showSuccess: 0, enginesList: EngineData, chassisList: ChassiData });
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.post('/myTeams', async function(req, res, next) {
@@ -158,6 +163,19 @@ app.get('/admin/drivers', async function(req, res) {
   res.render('admin/manageDrivers', { driversList: DriverData });
 });
 
+app.post('/admin/drivers', async function(req, res, next) {
+  let saveDrivers = new Driver(DriverData);
+  saveDrivers.value = req.body.
+
+  DriverData = await Driver.find({}, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      return data;
+    }
+  });
+  res.render('admin/manageDrivers', { driversList: DriverData });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
