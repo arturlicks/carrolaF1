@@ -47,6 +47,9 @@ let Team = new Schema({
     },
     currentPoints: {
         type: Number
+    },
+    currentDivision: {
+        type: Number
     }
 }, {
    collection: 'teams'
