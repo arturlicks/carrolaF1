@@ -67,8 +67,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', standingsRouter);
-app.get('/', function(req, res, next) {
-  res.render('standings', { title: 'Express' });
+app.get('/', async function(req, res, next) {
+  StandingsData = await Team.find({}, null, { sort: { currentPoints: -1 } }, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      return data;
+    }
+  });
+  res.render('standings', { standingsData: StandingsData });
 });
 app.get('/auth/google', 
   passport.authenticate('google', { scope : ['profile', 'email'] }));
