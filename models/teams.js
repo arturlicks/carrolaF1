@@ -44,6 +44,12 @@ let Team = new Schema({
     },
     creditsTeam2: {
         type: Number
+    },
+    currentPoints: {
+        type: Number
+    },
+    currentDivision: {
+        type: Number
     }
 }, {
    collection: 'teams'

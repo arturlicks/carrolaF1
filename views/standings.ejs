@@ -80,6 +80,26 @@
         </tr>
         </thead>
         <tbody>
+          <% let index = 0; %>
+          <% standingsData.forEach(function(teamData, idx, arr) { %>
+            <% if ( teamData.currentDivision == 1 ) { %>
+              <% index += 1; %>
+              <% if (Object.is(arr.length - 1, idx)) { %>
+                <tr class="table-danger">
+              <% } else { %>
+                <tr>
+              <% } %>
+                <th scope="row"><%= index %></th>
+                <td><%= teamData.team1Name %></td>
+                <td><%= teamData.teamOwner %></td>
+                <td><%= teamData.currentPoints %></td>
+                <td class="text-danger"><%= teamData.creditsTeam1 %><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                </td>
+              </tr>
+            <% } %>
+          <% }) %>
         <tr>
             <th scope="row">1</th>
             <td>Small Block Turbo Racing</td>
@@ -110,7 +130,7 @@
             </td>
             <td>9558</td>
         </tr>
-        <tr class="table-danger">
+        <tr>
             <th scope="row">4</th>
             <td>Geleia Racing</td>
             <td>Luis Carlos Geleia</td>
@@ -133,7 +153,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="table-primary">
+          <% index = 0; %>
+          <% standingsData.forEach(function(teamData) { %>
+            <% if ( teamData.currentDivision == 2 ) {%>
+              <% index += 1; %>
+              <% if (index == 1 || index == 2) { %>
+                <tr class="table-primary">
+              <% } else { %>
+                <tr>
+              <% } %>
+                <th scope="row"><%= index %></th>
+                <td><%= teamData.team1Name %></td>
+                <td><%= teamData.teamOwner %></td>
+                <td><%= teamData.currentPoints %></td>
+                <td class="text-danger"><%= teamData.creditsTeam1 %><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                </td>
+              </tr>
+            <% } %>
+          <% }) %>
+        <tr>
             <th scope="row">1</th>
             <td>Small Block Turbo Racing</td>
             <td>Lucas</td>
