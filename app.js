@@ -12,7 +12,12 @@ const uri = process.env.DB_URL;
 const mongoose = require('mongoose');
 const session = require('express-session');
 
-
+// set up rate limiter: maximum of five requests per minute
+var RateLimit = require('express-rate-limit');
+var limiter = RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 5
+});
 
 /*  PASSPORT SETUP  */
 
@@ -51,13 +56,16 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// apply rate limiter to all requests
+app.use(limiter);
+
 app.use(session({
    resave: false,
    saveUninitialized: true,
    secret: PASSPORT_SECRET 
  }));
 
- app.use(passport.initialize());
+app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(logger('dev'));
