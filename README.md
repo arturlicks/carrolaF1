@@ -6,6 +6,8 @@ KAM Carrola F1
 1. Run via cmd: `git clone https://github.com/arturlicks/carrolaF1.git`
 1. A folder carrolaF1 will be created
 1. `cd` into carrolaF1
+1. Create a `.env` file in the root folder
+1. Set the variable `DB_URL` from MongoDB Atlas
 1. Run command `npm install`
 1. To run the server `npm start`
 1. Open the browser at `localhost:3000`
