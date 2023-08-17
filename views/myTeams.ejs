@@ -1,4 +1,4 @@
-<% include header.ejs %>
+<%- include ("header.ejs") %>
 
 <h2 class="text-center"><%= user.displayName %></h2>
 <form method="POST" action="/myTeams">
@@ -190,6 +190,6 @@
 
 <script src="/javascripts/myTeams.js"></script>
 
-<% include engineChassiDriversTable.ejs %>
+<%- include ("engineChassiDriversTable.ejs") %>
 
-<% include footer.ejs %>
+<%- include ("footer.ejs") %>
